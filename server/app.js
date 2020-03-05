@@ -20,4 +20,12 @@ app.use('/api/deals', require('./routes/deals.routes'));
 app.use('/api/profile', require('./routes/profile.routes'));
 app.use('/api/files', require('./routes/files.routes'));
 
+
+app.use((req,res) => {
+
+    res.sendFile(__dirname + "./public/index.html");
+});
+
+
+
 module.exports = app;
