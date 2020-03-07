@@ -9,6 +9,19 @@ router.get('/getAllDeals', (req, res, next) => {
     .catch(err => console.log(err))
 })
 
+router.post('/getFilterDeals', (req, res, next) => {
+  console.log("el req body",req.body)
+  const DealSearch = req.body.input
+  Deal.find({
+    "name": {
+      $regex: `.*${DealSearch}.*`,
+      $options: 'i'
+    }
+  })
+    .then(FilterDeals => res.json(FilterDeals))
+    .catch(err => console.log(err))
+})
+
 router.get('/getOneDeal/:id', (req, res, next) => {
   
   Deal.findById(req.params.id)
@@ -62,6 +75,13 @@ router.get('/giveDisLike/:id', (req, res, next) =>{
     .catch(err => next(err));
   }
 
+})
+
+router.post('/edit/:id', (req, res, next) => {
+  
+  Deal.findByIdAndUpdate(req.params.id,req.body)
+    .then(theDeal => res.json(theDeal))
+    .catch(err => console.log(err))
 })
 
 // router.get('/getTotalLikes/:id', (req, res, next) =>{

@@ -5,6 +5,7 @@ const logger = require('morgan');
 const path = require('path');
 const express = require('express')
 const cors = require('cors')
+const flash = require("connect-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
@@ -44,7 +45,7 @@ app.use(session({
         credentials: true        // RUTAS PERSISTENTES
     }
     app.use(cors(corsOptions))
-
+    app.use(flash());
 
     app.set('views', path.join(__dirname, '..', 'views'));
     app.set('view engine', 'hbs');

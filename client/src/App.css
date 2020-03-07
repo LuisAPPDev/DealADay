@@ -29,6 +29,30 @@ h1{
   text-align: center;
 }
 
+.navbarFooter{
+
+  margin-bottom: 5px;
+  background-color: black;
+  /* background-color: rgb(255, 201, 23); */
+}
+
+.cardSpacing{
+  margin: 10px 10px
+}
+
+.navbarSearch{
+background-color: rgb(255, 201, 23);
+  margin-bottom: 40px;
+}
+
+.footerPos{
+  height: 40px;
+  width: 100vw;
+  
+
+}
+
+
 
 
 

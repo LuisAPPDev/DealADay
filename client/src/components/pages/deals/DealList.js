@@ -4,6 +4,8 @@ import DealCard from './DealCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
+import CategorySearch from '../../ui/CategorySearch'
+import Spinner from 'react-bootstrap/Spinner'
 
 class DealsList extends Component {
 
@@ -24,20 +26,27 @@ class DealsList extends Component {
             .catch(err => console.log(err))
     }
 
+    
+    getFilterDeals = (input) => {
+        this.services.getFilterDeals(input)
+            .then(FilterDeals => this.setState({ deals: FilterDeals }))
+            .catch(err => console.log(err))
+    }
+
     render() {
 
         return (
             <Container style={{ textAlign: 'center' }}>
 
 
- 
+                <CategorySearch dealFilter={this.getFilterDeals}/>
                 {this.state.deals.length ? (
                     <Row style={{ justifyContent: 'center' }}>
                         {this.state.deals.map(elm => <DealCard key={elm._id} {...elm} />)}
                     </Row>
                 )
                     :
-                    <p>CARGANDO...</p>
+                    <Spinner animation="border" variant="warning" />
 
                 }
 

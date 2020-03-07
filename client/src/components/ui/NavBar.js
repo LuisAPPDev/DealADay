@@ -4,6 +4,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import AuthServices from '../../services/auth.services'
 import { Link } from 'react-router-dom'
+import FormControl from 'react-bootstrap/FormControl'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 class Navigation extends Component {
 
@@ -32,23 +35,37 @@ class Navigation extends Component {
 
             this.props.loggedInUser ?
                 (
-                    <Navbar bg="dark" expand="lg" variant="dark">
-                        <Nav.Link as="div"> <Link to="/">Deal a Day!</Link></Nav.Link>
+                    <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
+                        <Navbar.Brand href="#home">
+            <img alt="" src="../../../icons/logo-big-w2_400x400.png" width="30" height="30" className="d-inline-block align-top"/>
+        <span style={{color:"#55b1ca"}}>Deal </span><span style={{color:"#f97810"}}>a </span><span style ={{color:"#55b1ca"}}>day</span>
+    </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
+                        
                             <Nav className="ml-auto">
                                 <Nav.Link as="div"> <Link to="/">Inicio</Link></Nav.Link>
                                 <Nav.Link as="div"> <Link to="/profile">Perfil</Link></Nav.Link>
                                 <Nav.Link onClick={this.logout}>Cerrar sesión</Nav.Link>
                                 <Nav.Link as="div">{greeting}</Nav.Link>
                             </Nav>
+                            
                         </Navbar.Collapse>
                     </Navbar>
                 )
                 :
                 (
-                    <Navbar bg="dark" expand="lg" variant="dark">
-                        <Nav.Link as="div"> <Link to="/">Deal a Day!</Link></Nav.Link>
+                    <Navbar sticky="top" bg="warning" expand="lg" variant="light">
+                        <Navbar.Brand href="#home">
+      <img
+        alt=""
+        src="/logo.svg"
+        width="20"
+        height="20"
+        className="d-inline-block align-top"
+      />{' '}
+      
+    </Navbar.Brand>
                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ml-auto">

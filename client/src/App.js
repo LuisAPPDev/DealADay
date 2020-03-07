@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 /* --- Styling sheets --- */
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 /* --- Styling sheets --- */
 import NavBar from './components/ui/NavBar'
@@ -19,6 +19,8 @@ import Signup from './components/auth/signup'
 import Profile from './components/pages/profile/profile'
 import DealsList from './components/pages/deals/DealList';
 import DealDetails from './components/pages/deals/DealDetails';
+import Footer from './components/ui/Footer'
+
 
 
 class App extends Component{
@@ -32,7 +34,7 @@ class App extends Component{
 
   }
 
-  componentDidUpdate = (prevProps, prevState) => console.log("El estado de App se ha actualizado:", this.state)
+  //componentDidUpdate = (prevProps, prevState) => console.log("El estado de App se ha actualizado:", this.state)
   componentDidMount = () => this.fetchUser()
 
   setTheUser = userObj => this.setState({ loggedInUser: userObj })
@@ -49,14 +51,16 @@ class App extends Component{
       <>
       
       <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-      
+     
       <Switch>
-          <Route exact path="/" render={() => <DealsList loggedInUser={this.state.loggedInUser} />} />
+          <Route exact path="/" render={() =>  <DealsList loggedInUser={this.state.loggedInUser} />} />
           <Route exact path="/signup" render={() => <Signup setTheUser={this.setTheUser} />} />
           <Route exact path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route exact path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-          <Route path="/deals/:id" render={props => <DealDetails {...props} />} />
+          <Route path="/deals/:id" render={props => <DealDetails loggedInUser={this.state.loggedInUser} {...props} />} />
         </Switch>
+      
+      <Footer/>
       
       </>
       
