@@ -1,4 +1,4 @@
-const User = require('../models/user.model');
+const User = require('../models/User.model');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -17,19 +17,25 @@ passport.deserializeUser((userIdFromSession, cb) => {
 
 passport.use(new LocalStrategy((username, password, next) => {
 
-    User.findOne({ username }, (err, foundUser) => {
+    User.findOne({
+        username
+    }, (err, foundUser) => {
         if (err) {
             next(err);
             return;
         }
 
         if (!foundUser) {
-            next(null, false, { message: 'Usuario no registrado.' });
+            next(null, false, {
+                message: 'Usuario no registrado.'
+            });
             return;
         }
 
         if (!bcrypt.compareSync(password, foundUser.password)) {
-            next(null, false, { message: 'Contraseña incorrecta.' });
+            next(null, false, {
+                message: 'Contraseña incorrecta.'
+            });
             return;
         }
 

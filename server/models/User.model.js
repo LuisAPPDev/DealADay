@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
@@ -13,16 +13,16 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true
-  },  
-  age : Number,
+  },
+  age: Number,
   role: {
     type: String,
-    enum : ['user', 'admin'],
+    enum: ['user', 'admin'],
     default: 'user'
   },
-  dislikes : [],
-  likes:[],
-  favs:[],
+  dislikes: [],
+  likes: [],
+  favs: [],
 }, {
   timestamps: {
     createdAt: 'created_at',

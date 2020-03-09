@@ -14,11 +14,13 @@ const MongoStore = require("connect-mongo")(session);
 
 module.exports = app => {
 
-    
+
     // Middleware Setup
     app.use(logger('dev'));
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.urlencoded({
+        extended: false
+    }));
     app.use(cookieParser());
 
     // Express View engine setup
@@ -29,12 +31,14 @@ module.exports = app => {
     }));
 
     // Enable authentication using session + passport
-app.use(session({
-    secret: 'irongenerator',
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore( { mongooseConnection: mongoose.connection })
-  }))
+    app.use(session({
+        secret: 'irongenerator',
+        resave: true,
+        saveUninitialized: true,
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection
+        })
+    }))
 
     const whitelist = ['http://localhost:5000']
     const corsOptions = {
@@ -42,7 +46,7 @@ app.use(session({
             const originWhitelisted = whitelist.includes(origin)
             cb(null, originWhitelisted)
         },
-        credentials: true        // RUTAS PERSISTENTES
+        credentials: true // RUTAS PERSISTENTES
     }
     app.use(cors(corsOptions))
     app.use(flash());
