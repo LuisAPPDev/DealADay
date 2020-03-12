@@ -20,7 +20,7 @@ import moment from "moment";
 
 //Design Components
 
-import clock from "../../../images/alarm-24px.svg"
+import clock from "../../../images/alarm-24px.svg";
 // import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -47,28 +47,22 @@ class DealDetails extends Component {
   };
 
   getOneDeal = () => {
-    console.log(this.state.deal)
-    this.DealServices
-      .getDealDetails(this.props.match.params.id)
+    console.log(this.state.deal);
+    this.DealServices.getDealDetails(this.props.match.params.id)
       .then(theDeal => this.setState({ deal: theDeal }))
       .catch(err => console.log(err));
-      
   };
 
   getAllComments = () => {
-    
     this.CommentServices.getAllComments(this.props.match.params.id)
       .then(AllComments => this.setState({ comments: AllComments }))
       .catch(err => console.log(err));
-      
   };
 
   giveLike = () => {
-    
     this.DealServices.giveLike(this.props.match.params.id).then(() => this.getOneDeal());
     // this.getOneDeal()
   };
-
 
   render() {
     return (
@@ -78,7 +72,9 @@ class DealDetails extends Component {
             Home
           </Breadcrumb.Section>
           <Breadcrumb.Divider />
-          <Breadcrumb.Section as="a" href={`/category/${this.state.deal.category}`}>{this.state.deal.category} </Breadcrumb.Section>
+          <Breadcrumb.Section as="a" href={`/category/${this.state.deal.category}`}>
+            {this.state.deal.category}{" "}
+          </Breadcrumb.Section>
           <Breadcrumb.Divider />
           <Breadcrumb.Section active>{this.state.deal.name}</Breadcrumb.Section>
         </Breadcrumb>
@@ -86,7 +82,7 @@ class DealDetails extends Component {
           <Row>
             <Col md={{ span: 6 }}>
               <Row>
-                <Col style={{textAlign:"center" }}>
+                <Col style={{ textAlign: "center" }}>
                   <br></br>
                   <br></br>
                   <Button as="div" labelPosition="right">
@@ -101,11 +97,10 @@ class DealDetails extends Component {
                   <Image className="icons" src={clock}></Image>
                   <small className="text-muted">3 mins ago</small>
                   <h4>{this.state.deal.name}</h4>
-                  <span style={{ color: "orange" }}>{this.state.deal.price}€</span>{" "}
-                  <strike style={{ color: "red" }}>1156€</strike>
+                  <span style={{ color: "orange" }}>{this.state.deal.price}€</span> <strike style={{ color: "red" }}>1156€</strike>
                   <br></br>
                   <br></br>
-                  <Button as="a" href={this.state.deal.externalUrl}  target="_blank" basic color="blue" animated>
+                  <Button as="a" href={this.state.deal.externalUrl} target="_blank" basic color="blue" animated>
                     <Button.Content visible>Llevame al chollo</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />
@@ -113,11 +108,7 @@ class DealDetails extends Component {
                   </Button>
                 </Col>
                 <Col>
-                  <img
-                    className="rounded dealDescriptionImg"
-                    src={this.state.deal.imageUrl}
-                    alt={this.state.deal.title}
-                  ></img>
+                  <img className="rounded dealDescriptionImg" src={this.state.deal.imageUrl} alt={this.state.deal.title}></img>
                   <Header textAlign="center" size="medium">
                     Compártelo en las redes
                   </Header>
@@ -148,36 +139,34 @@ class DealDetails extends Component {
                 <Link to="/">Volver</Link>
               </Button>
               {this.props.loggedInUser.role === "admin" ? (
-              <Accordion>
-                <Card>
-                  <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                      Admin Options
-                    </Accordion.Toggle>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                     
+                <Accordion>
+                  <Card>
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Admin Options
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                      <Card.Body>
                         <Link to="#" onClick={this.openModal}>
                           Editar
                         </Link>
-                     
-                      <br></br>
-                      
+
+                        <br></br>
+
                         <Link to="#" onClick="">
                           Cambiar estado publicación
                         </Link>
-                     
-                      <br></br>
-                     
+
+                        <br></br>
+
                         <Link to="#" onClick="">
                           Eliminar
                         </Link>
-                      
-                    </Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
               ) : null}
             </Col>
           </Row>
@@ -187,13 +176,7 @@ class DealDetails extends Component {
           <Modal.Body>
             <h3>Editar chollo</h3>
             <hr></hr>
-            <EditDeal
-              {...this.props}
-              deal={this.state.deal}
-              update={this.getOneDeal}
-              loggedInUser={this.props.loggedInUser}
-              closeModal={this.closeModal}
-            />
+            <EditDeal {...this.props} deal={this.state.deal} update={this.getOneDeal} loggedInUser={this.props.loggedInUser} closeModal={this.closeModal} />
           </Modal.Body>
         </Modal>
       </>

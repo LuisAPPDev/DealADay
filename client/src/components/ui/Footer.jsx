@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+//Services
+import AuthServices from "../../services/auth.services";
+
+//Style components
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import AuthServices from "../../services/auth.services";
-import { Link } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+//Services
+import AuthServices from "../../services/auth.services";
+
+//Style Componentes
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import AuthServices from "../../services/auth.services";
-import { Link } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -19,19 +23,23 @@ class CategorySearch extends Component {
   handleChange = e => {
     e.preventDefault();
     let { value } = e.target;
-    this.setState({
-      search: value
-    }, () => this.props.dealFilter(this.state.search))
-
-    
-  }
+    this.setState(
+      {
+        search: value
+      },
+      () => this.props.dealFilter(this.state.search)
+    );
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    let { id } = e.target.dataset
-    this.setState({
-      search: id
-    }, () => this.props.dealFilter(this.state.search))
+    let { id } = e.target.dataset;
+    this.setState(
+      {
+        search: id
+      },
+      () => this.props.dealFilter(this.state.search)
+    );
     console.log(e.target.dataset);
     this.props.dealFilter(e.target.dataset);
   };
@@ -42,14 +50,7 @@ class CategorySearch extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Form inline>
-            <FormControl
-              type="text"
-              name="search"
-              onChange={this.handleChange}
-              value={this.state.search}
-              placeholder="Buscar chollo!"
-              className="mr-sm-2"
-            />
+            <FormControl type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Buscar chollo!" className="mr-sm-2" />
             <Button variant="outline-info" onClick={this.handleSubmit}>
               Search
             </Button>

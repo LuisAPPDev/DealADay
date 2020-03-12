@@ -38,16 +38,14 @@ class Profile extends Component {
 
   getDealsApproved = () => {
     this.state.searchDeals = "Aprobados";
-    this.ProfServices
-      .getDealsApproved()
+    this.ProfServices.getDealsApproved()
       .then(DealsApproved => this.setState({ deals: DealsApproved }))
       .catch(err => console.log(err));
   };
 
   getDealsPending = () => {
     this.state.searchDeals = "Pendientes";
-    this.ProfServices
-      .getDealsPending()
+    this.ProfServices.getDealsPending()
       .then(DealsPending => this.setState({ deals: DealsPending }))
       .catch(err => console.log(err));
   };
@@ -58,7 +56,6 @@ class Profile extends Component {
     this.FilesServices.handleUploadAvatar(uploadData)
       .then(response => {
         console.log("Subida de archivo finalizada! La URL de Cloudinray es: ", response.secure_url);
-              
       })
       .catch(err => console.log(err));
   };
@@ -71,10 +68,10 @@ class Profile extends Component {
             {/* <Icon name="users" circular /> */}
             <Image circular name="avatar" src={this.props.loggedInUser.avatar} />
             <Header.Content>Bienvenido {this.props.loggedInUser.username}</Header.Content>
-            <small>Miembro desde {moment(this.props.loggedInUser.created_at).format('L')}</small>
+            <small>Miembro desde {moment(this.props.loggedInUser.created_at).format("L")}</small>
           </Header>
 
-          <Row> 
+          <Row>
             <br></br>
             <div class="col-md-6">
               <ul class="list-group">
@@ -103,17 +100,13 @@ class Profile extends Component {
                   <span className="badge badge-primary badge-pill">1</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center">
-                <Form.Group>
-          <Form.Label> Cambiar Avatar </Form.Label>{" "}
-          <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />{" "}
-        </Form.Group>
-        </li>
+                  <Form.Group>
+                    <Form.Label> Cambiar Avatar </Form.Label> <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />{" "}
+                  </Form.Group>
+                </li>
               </ul>
             </div>
-            <div class="col-md-6">
-              
-              Prueba
-              </div>
+            <div class="col-md-6">Prueba</div>
           </Row>
           <div className="row">
             {this.state.deals.map(elm => (

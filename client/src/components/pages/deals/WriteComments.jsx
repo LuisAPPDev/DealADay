@@ -21,12 +21,11 @@ class WriteComments extends Component {
 
   finishAction = () => {
     this.props.update();
-      this.setState({
-        comment: {  
-          content: ""
-        }
-      })
-    
+    this.setState({
+      comment: {
+        content: ""
+      }
+    });
   };
 
   createComment = () => {
@@ -43,7 +42,7 @@ class WriteComments extends Component {
         deal: this.props.match.params.id,
         content: value
       }
-    })
+    });
   };
 
   handleSubmit = e => {
@@ -54,19 +53,8 @@ class WriteComments extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} reply>
-        <Form.TextArea
-          onChange={this.handleChange}
-          name="content"
-          value={this.state.comment.content}
-          placeholder="¿Algo que aportar?"
-        />
-        <Button
-          type="submit"
-          content="Add Reply"
-          labelPosition="left"
-          icon="edit"
-          primary
-        />
+        <Form.TextArea onChange={this.handleChange} name="content" value={this.state.comment.content} placeholder="¿Algo que aportar?" />
+        <Button type="submit" content="Add Reply" labelPosition="left" icon="edit" primary />
       </Form>
     );
   }

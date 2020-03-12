@@ -7,34 +7,31 @@ import CommentsServices from "../../../services/comments.services";
 import moment from "moment";
 
 //Style components
-import { Button, Comment, Icon, Form, Header} from "semantic-ui-react";
+import { Button, Comment, Icon, Form, Header } from "semantic-ui-react";
 
-let activeComment = 0
+let activeComment = 0;
 let borr = new CommentsServices();
 
-
 const ShowComments = ({ _id, content, author, created_at, update }) => {
-
-  
-  function deleteComment(id){
-    borr.deleteComment(id)
-    .then(()=> update())
-    .catch(err => console.log('ha ido mal', err))
-    
+  function deleteComment(id) {
+    borr
+      .deleteComment(id)
+      .then(() => update())
+      .catch(err => console.log("ha ido mal", err));
   }
-  
-  function handleDelete(e){
+
+  function handleDelete(e) {
     activeComment = e.target.dataset;
-    deleteComment(activeComment)
-  };
+    deleteComment(activeComment);
+  }
   return (
     <Comment.Group>
       <Comment>
-        <Comment.Avatar src={author.avatar}/>
+        <Comment.Avatar src={author.avatar} />
         <Comment.Content>
           <Comment.Author as="a">{author.username}</Comment.Author>
           <Comment.Metadata>
-            {moment(created_at).format("lll")} <Icon data-id={_id} onClick={handleDelete} circular name="trash alternate outline" size="small" className="red users icon" /> 
+            {moment(created_at).format("lll")} <Icon data-id={_id} onClick={handleDelete} circular name="trash alternate outline" size="small" className="red users icon" />
           </Comment.Metadata>
           <Comment.Text>{content} </Comment.Text>
           <Comment.Actions>

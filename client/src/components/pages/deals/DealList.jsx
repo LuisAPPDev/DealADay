@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 //Services
 import DealServices from "../../../services/deal.services";
-import CategoryService from "../../../services/category.services"
+import CategoryService from "../../../services/category.services";
 //Components
 import CategorySearch from "../../ui/CategorySearch";
 import DealCard from "./DealCard";
@@ -12,9 +12,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import {Statistic} from 'semantic-ui-react'
-
-
+import { Statistic } from "semantic-ui-react";
 
 class DealsList extends Component {
   constructor(props) {
@@ -26,40 +24,33 @@ class DealsList extends Component {
     this.CategoryService = new CategoryService();
   }
 
-    
-
-  componentDidMount = () => {(this.props.match) ? this.getDealsbyCategory() : this.getAllDeals()};
+  componentDidMount = () => {
+    this.props.match ? this.getDealsbyCategory() : this.getAllDeals();
+  };
   // componentDidMount = () => this.getDealsbyCategory();
 
-
   getAllDeals = () => {
-    
-    this.DealServices
-      .getAllDeals()
+    this.DealServices.getAllDeals()
       .then(allDeals => this.setState({ deals: allDeals }))
       .catch(err => console.log(err));
   };
 
   getFilterDeals = input => {
-    this.DealServices
-      .getFilterDeals(input)
+    this.DealServices.getFilterDeals(input)
       .then(FilterDeals => this.setState({ deals: FilterDeals }))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 
   getDealsbyCategory = () => {
-
     this.CategoryService.getDealsbyCategory(this.props.match.params.id)
-    .then(DealsbyCategory => this.setState({deals : DealsbyCategory}))
-    .catch(err => console.log(err))
-  }
+      .then(DealsbyCategory => this.setState({ deals: DealsbyCategory }))
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
       <Container style={{ textAlign: "center" }}>
-
-<Statistic.Group color="blue">
-          
+        <Statistic.Group color="blue">
           <Statistic>
             <Statistic.Value>{this.state.deals.length}</Statistic.Value>
             <Statistic.Label>Chollos</Statistic.Label>
