@@ -64,8 +64,8 @@ class CategorySearch extends Component {
                 <Dropdown.Item data-id="patinete" onClick={this.handleSubmit}>
                   Portatiles
                 </Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Componentes PC</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Televisores</Dropdown.Item>
+                <Dropdown.Item href="/deals/category/">Componentes PC</Dropdown.Item>
+                <Dropdown.Item href="/deals/category/Televisores">Televisores</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>

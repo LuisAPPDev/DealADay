@@ -20,6 +20,7 @@ app.use('/api/deals', require('./routes/deals.routes'));
 app.use('/api/profile', require('./routes/profile.routes'));
 app.use('/api/files', require('./routes/files.routes'));
 app.use('/api/comments', require('./routes/comments.routes'));
+app.use('/api/category', require ('./routes/category.routes'))
 
 app.use((req,res) => {
 

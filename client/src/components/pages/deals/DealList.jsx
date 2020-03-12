@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 //Services
 import DealServices from "../../../services/deal.services";
-import DealCard from "./DealCard";
-
+import CategoryService from "../../../services/category.services"
 //Components
 import CategorySearch from "../../ui/CategorySearch";
+import DealCard from "./DealCard";
 
 //Style components
 import Container from "react-bootstrap/Container";
@@ -22,42 +22,51 @@ class DealsList extends Component {
     this.state = {
       deals: []
     };
-    this.services = new DealServices();
+    this.DealServices = new DealServices();
+    this.CategoryService = new CategoryService();
   }
 
-  componentDidMount = () => this.getAllDeals();
+    
+
+  componentDidMount = () => {(this.props.match) ? this.getDealsbyCategory() : this.getAllDeals()};
+  // componentDidMount = () => this.getDealsbyCategory();
+
 
   getAllDeals = () => {
-    this.services
+    
+    this.DealServices
       .getAllDeals()
       .then(allDeals => this.setState({ deals: allDeals }))
       .catch(err => console.log(err));
   };
 
   getFilterDeals = input => {
-    this.services
+    this.DealServices
       .getFilterDeals(input)
       .then(FilterDeals => this.setState({ deals: FilterDeals }))
-      .catch(err => console.log(err));
-      console.log(input)
+      .catch(err => console.log(err))
   };
+
+  getDealsbyCategory = () => {
+
+    this.CategoryService.getDealsbyCategory(this.props.match.params.id)
+    .then(DealsbyCategory => this.setState({deals : DealsbyCategory}))
+    .catch(err => console.log(err))
+  }
 
   render() {
     return (
       <Container style={{ textAlign: "center" }}>
 
-<Statistic.Group>
+<Statistic.Group color="blue">
+          
           <Statistic>
-            <Statistic.Value>22</Statistic.Value>
-            <Statistic.Label>Faves</Statistic.Label>
-          </Statistic>
-          <Statistic>
-            <Statistic.Value>31,200</Statistic.Value>
-            <Statistic.Label>Views</Statistic.Label>
+            <Statistic.Value>{this.state.deals.length}</Statistic.Value>
+            <Statistic.Label>Chollos</Statistic.Label>
           </Statistic>
           <Statistic>
             <Statistic.Value>22</Statistic.Value>
-            <Statistic.Label>Members</Statistic.Label>
+            <Statistic.Label>Usuarios</Statistic.Label>
           </Statistic>
         </Statistic.Group>
         <CategorySearch dealFilter={this.getFilterDeals} />

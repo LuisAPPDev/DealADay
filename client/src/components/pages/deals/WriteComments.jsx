@@ -22,8 +22,7 @@ class WriteComments extends Component {
   finishAction = () => {
     this.props.update();
       this.setState({
-        comment: {
-          
+        comment: {  
           content: ""
         }
       })

@@ -20,6 +20,7 @@ import moment from "moment";
 
 //Design Components
 
+import clock from "../../../images/alarm-24px.svg"
 // import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -77,7 +78,7 @@ class DealDetails extends Component {
             Home
           </Breadcrumb.Section>
           <Breadcrumb.Divider />
-          <Breadcrumb.Section link>{this.state.deal.category}</Breadcrumb.Section>
+          <Breadcrumb.Section as="a" href={`/category/${this.state.deal.category}`}>{this.state.deal.category} </Breadcrumb.Section>
           <Breadcrumb.Divider />
           <Breadcrumb.Section active>{this.state.deal.name}</Breadcrumb.Section>
         </Breadcrumb>
@@ -97,7 +98,7 @@ class DealDetails extends Component {
                       {this.state.deal.likes && this.state.deal.likes.length}
                     </Label>
                   </Button>
-                  <Image className="icons" src="../../../../icons/alarm-24px.svg"></Image>
+                  <Image className="icons" src={clock}></Image>
                   <small className="text-muted">3 mins ago</small>
                   <h4>{this.state.deal.name}</h4>
                   <span style={{ color: "orange" }}>{this.state.deal.price}€</span>{" "}
