@@ -5,6 +5,11 @@ const userSchema = new Schema({
   username: String,
   password: String,
   email: String,
+  avatar:{
+    type:String,
+    default: "../../../../icons/defaultAvatar.jpg"
+
+  },
   status: {
     type: String,
     enum: ["Pending Confirmation", "Active"],

@@ -25,9 +25,8 @@ class Footer extends Component {
 
   render() {
     return (
-      <Navbar fixed="bottom" className="footerPos" bg="warning" variant="dark">
+      <Navbar className="footerPos" bg="warning" variant="dark">
         <Nav.Link as="div">
-          {" "}
           <Link to="/">
             <p>&copy; Deal a Day 2020 All Rights Reserved</p>
           </Link>

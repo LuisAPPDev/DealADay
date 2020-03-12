@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+
+//Services
 import FilesServices from "../../../services/files.services";
 import DealServices from "../../../services/deal.services";
+
+//Design components
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import { Button } from "semantic-ui-react";
 
 class EditDeal extends Component {
   constructor(props) {
@@ -49,10 +54,7 @@ class EditDeal extends Component {
     uploadData.append("imageUrl", e.target.files[0]);
     this.FilesServices.handleUpload(uploadData)
       .then(response => {
-        console.log(
-          "Subida de archivo finalizada! La URL de Cloudinray es: ",
-          response.secure_url
-        );
+        console.log("Subida de archivo finalizada! La URL de Cloudinray es: ", response.secure_url);
         this.setState({
           deal: { ...this.state.deal, imageUrl: response.secure_url }
         });
@@ -65,12 +67,7 @@ class EditDeal extends Component {
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Label>Nombre</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            value={this.state.deal.name}
-            onChange={this.handleChange}
-          />
+          <Form.Control type="text" name="name" value={this.state.deal.name} onChange={this.handleChange} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Descripción</Form.Label>
@@ -83,31 +80,23 @@ class EditDeal extends Component {
         </Form.Group>
         <Form.Group>
           <Form.Label>Category</Form.Label>
-          <Form.Control
-            type="text"
-            name="category"
-            value={this.state.deal.category}
-            onChange={this.handleChange}
-          />
+          <Form.Control type="text" name="category" value={this.state.deal.category} onChange={this.handleChange} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Imagen</Form.Label>
-          <Form.Control
-            type="text"
-            name="image"
-            value={this.state.deal.imageUrl}
-            onChange={this.handleChange}
-          />
-          <Form.Control
-            type="file"
-            name="imageUrl"
-            onChange={this.handleFileUpload}
-          />
+          <Form.Control type="text" name="image" value={this.state.deal.imageUrl} onChange={this.handleChange} />
+          <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />
         </Form.Group>
-
-        <Button variant="dark" type="submit">
+        <Button.Group>
+          <Button type="submit" positive>
+            Editar
+          </Button>
+          <Button.Or />
+          <Button>Cancelar</Button>
+        </Button.Group>
+        {/* <Button variant="dark" type="submit">
           Editar
-        </Button>
+        </Button> */}
       </Form>
     );
   }

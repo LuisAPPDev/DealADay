@@ -6,20 +6,20 @@ const User = require('../models/User.model')
 router.get('/getAllDeals', (req, res, next) => {
   Deal.find({
       status: "active"
-    })
+    }).populate('author')
     .then(allDeals => res.json(allDeals))
     .catch(err => console.log(err))
 })
 
 router.post('/getFilterDeals', (req, res, next) => {
-  console.log("el req body", req.body)
   const DealSearch = req.body.input
+  console.log(DealSearch)
   Deal.find({
       "name": {
         $regex: `.*${DealSearch}.*`,
         $options: 'i'
       }
-    })
+    }).populate('author')
     .then(FilterDeals => res.json(FilterDeals))
     .catch(err => console.log(err))
 })
@@ -33,31 +33,33 @@ router.get('/getOneDeal/:id', (req, res, next) => {
 
 router.get('/giveLike/:id', (req, res, next) => {
 
-  if (req.user.favs.includes(req.params.id)) {
+  if (req.user.likes.includes(req.params.id)) {
 
     const userLike = {
       $pull: {
-        favs: req.params.id
+        likes: req.params.id
       }
     };
 
     User.findByIdAndUpdate(req.user.id, userLike)
+    .then(UpdatedUser => res.json(UpdatedUser))
       .catch(err => next(err));
 
     const dealLike = {
       $pull: {
-        favs: req.user.id
+        likes: req.user.id
       }
     };
 
     Deal.findByIdAndUpdate(req.params.id, dealLike)
+    .then(UpdatedDeal => res.json(UpdatedDeal))
       .catch(err => next(err));
 
   } else {
 
     const userLike = {
       $push: {
-        favs: req.params.id
+        likes: req.params.id
       }
     };
     User.findByIdAndUpdate(req.user.id, userLike)
@@ -70,46 +72,47 @@ router.get('/giveLike/:id', (req, res, next) => {
     };
 
     Deal.findByIdAndUpdate(req.params.id, dealLike)
+    .then(UpdatedDeal => res.json(UpdatedDeal))
       .catch(err => next(err));
   }
 
 })
 
-router.get('/giveDisLike/:id', (req, res, next) => {
+// router.get('/giveDisLike/:id', (req, res, next) => {
 
-  if (req.user.favs.includes(req.params.id)) {
-    const userLike = {
-      $pull: {
-        favs: req.params.id
-      }
-    };
-    User.findByIdAndUpdate(req.user.id, userLike)
-      .catch(err => next(err));
-    const dealLike = {
-      $pull: {
-        favs: req.user.id
-      }
-    };
-    Deal.findByIdAndUpdate(req.params.id, dealLike)
-      .catch(err => next(err));
-  } else {
-    const userLike = {
-      $push: {
-        favs: req.params.id
-      }
-    };
-    User.findByIdAndUpdate(req.user.id, userLike)
-      .catch(err => next(err));
-    const dealLike = {
-      $push: {
-        likes: req.user.id
-      }
-    };
-    Deal.findByIdAndUpdate(req.params.id, dealLike)
-      .catch(err => next(err));
-  }
+//   if (req.user.favs.includes(req.params.id)) {
+//     const userLike = {
+//       $pull: {
+//         favs: req.params.id
+//       }
+//     };
+//     User.findByIdAndUpdate(req.user.id, userLike)
+//       .catch(err => next(err));
+//     const dealLike = {
+//       $pull: {
+//         favs: req.user.id
+//       }
+//     };
+//     Deal.findByIdAndUpdate(req.params.id, dealLike)
+//       .catch(err => next(err));
+//   } else {
+//     const userLike = {
+//       $push: {
+//         favs: req.params.id
+//       }
+//     };
+//     User.findByIdAndUpdate(req.user.id, userLike)
+//       .catch(err => next(err));
+//     const dealLike = {
+//       $push: {
+//         likes: req.user.id
+//       }
+//     };
+//     Deal.findByIdAndUpdate(req.params.id, dealLike)
+//       .catch(err => next(err));
+//   }
 
-})
+// })
 
 router.post('/edit/:id', (req, res, next) => {
 
@@ -118,25 +121,11 @@ router.post('/edit/:id', (req, res, next) => {
     .catch(err => console.log(err))
 })
 
-// router.get('/getTotalLikes/:id', (req, res, next) =>{
-
-//     Deal.findOne
-// //     .catch(err => next(err));
-// //   } else {
-// //     const userLike = { $push: { favs: req.params.id } };
-// //     User.findByIdAndUpdate(req.user.id, userLike)
-// //       .catch(err => next(err));
-// //       const dealLike = { $push : {likes : req.user.id}};
-// //     Deal.findByIdAndUpdate(req.params.id, dealLike)
-// //     .catch(err => next(err));
-// //   }
-
-//   //HAY QUE AÑADIR LOS LIKES A LA BBDD DE LOS PRODUCTOS PORQUE SOLO LOS ESTOY HACIENDO EN LA DE LOS USERS.
-
-
-// })
-
-
+router.post('/delete', (req, res, next) => {
+  Deal.deleteOne(req.body)
+    .then(theDeal => res.json(theDeal))
+    .catch(err => console.log(err))
+})
 
 
 

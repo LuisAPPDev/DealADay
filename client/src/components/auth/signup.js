@@ -1,51 +1,84 @@
-import React, { Component } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import AuthServices from '../../services/auth.services'
+import React, { Component } from "react";
+// import Form from 'react-bootstrap/Form'
+// import Button from 'react-bootstrap/Button'
+import Container from "react-bootstrap/Container";
+import AuthServices from "../../services/auth.services";
+import { Button, Checkbox, Form, Header } from "semantic-ui-react";
 
 class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+      email: ""
+    };
+    this.services = new AuthServices();
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: '',
-            password: '',
-            email: ''
-        }
-        this.services = new AuthServices()
-    }
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
+  postUser = () => {
+    this.services
+      .signup(this.state)
+      .then(theLoggedNewUser => {
+        this.setState({ username: "", password: "", email: "" });
+        this.props.setTheUser(theLoggedNewUser);
+      })
+      .catch(err => console.log({ err }));
+  };
 
-    handleChange = e => {
-        let { name, value } = e.target
-        this.setState({ [name]: value })
-    }
+  handleSubmit = e => {
+    e.preventDefault();
+    this.postUser();
+  };
 
-    postUser = () => {
-        this.services.signup(this.state)
-            .then(theLoggedNewUser => {
-                this.setState({ username: '', password: '', email: '' })
-                this.props.setTheUser(theLoggedNewUser)
-            })
-            .catch(err => console.log({ err }))
-    }
+  render() {
+    return (
+      <Container>
+        <Header textAlign="center" size="huge">
+          Registrarse
+        </Header>
 
-    handleSubmit = e => {
-        e.preventDefault()
-        this.postUser()
-    }
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field required>
+            <label>Nombre de Usuario:</label>
+            <input
+              placeholder="Nombre de usuario"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field required>
+            <label>Contraseña</label>
+            <input
+              placeholder="Contraseña"
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field required>
+            <label>Email</label>
+            <input
+              placeholder="Email"
+              type="email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Checkbox inline label="Acepto los terminos y condiciones" required />
 
+          <Button type="submit">Registrarme</Button>
+        </Form>
 
-    render() {
-
-        return (
-
-            <Container>
-
-                <h1>Registro de usuarios</h1>
-
-                <Form onSubmit={this.handleSubmit}>
+        {/* <Form onSubmit={this.handleSubmit}>
                     <Form.Group>
                         <Form.Label>Usuario</Form.Label>
                         <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleChange} />
@@ -60,11 +93,10 @@ class Signup extends Component {
                     </Form.Group>
 
                     <Button variant="dark" type="submit">Registrarse</Button>
-                </Form>
-            </Container>
-
-        )
-    }
+                </Form> */}
+      </Container>
+    );
+  }
 }
 
-export default Signup
+export default Signup;

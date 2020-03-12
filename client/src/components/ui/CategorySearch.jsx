@@ -21,19 +21,19 @@ class CategorySearch extends Component {
     let { value } = e.target;
     this.setState({
       search: value
-    });
+    }, () => this.props.dealFilter(this.state.search))
 
-    this.props.dealFilter(this.state.search);
-  };
+    
+  }
 
   handleSubmit = e => {
     e.preventDefault();
-    let { id } = e.target;
+    let { id } = e.target.dataset
     this.setState({
       search: id
-    });
-    console.log(this.state);
-    this.props.dealFilter(this.state.search);
+    }, () => this.props.dealFilter(this.state.search))
+    console.log(e.target.dataset);
+    this.props.dealFilter(e.target.dataset);
   };
 
   render() {
@@ -61,7 +61,7 @@ class CategorySearch extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item value="asus" onClick={this.handleChange}>
+                <Dropdown.Item data-id="patinete" onClick={this.handleSubmit}>
                   Portatiles
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Componentes PC</Dropdown.Item>

@@ -1,59 +1,28 @@
-.App {
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-h1{
-
-  text-align: center;
-}
-
-.navbarFooter{
-
+.navbarFooter {
   margin-bottom: 5px;
   background-color: black;
   /* background-color: rgb(255, 201, 23); */
 }
 
-.cardSpacing{
-  margin: 10px 10px
+.cardSpacing {
+  margin: 10px 10px;
 }
 
-.navbarSearch{
-background-color: rgb(255, 201, 23);
+.navbarSearch {
+  background-color: rgb(255, 201, 23);
   margin-bottom: 40px;
 }
 
-.footerPos{
+.footerPos {
   height: 40px;
   width: 100vw;
-  
-
+  margin-top: 10px;
 }
 
-
-
-
-
-
+.container {
+  min-height: calc(100vh - 113px);
+}

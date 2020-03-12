@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+
+//Services
 import CommentsServices from "../../../services/comments.services";
+
+//Style components
 import { Button, Form } from "semantic-ui-react";
 
 class WriteComments extends Component {
@@ -15,9 +19,20 @@ class WriteComments extends Component {
     };
   }
 
+  finishAction = () => {
+    this.props.update();
+      this.setState({
+        comment: {
+          
+          content: ""
+        }
+      })
+    
+  };
+
   createComment = () => {
     this.CommentsServices.createComment(this.state.comment)
-      .then(() => console.log("Creado"))
+      .then(() => this.finishAction())
       .catch(err => console.log(err));
   };
 
@@ -29,7 +44,7 @@ class WriteComments extends Component {
         deal: this.props.match.params.id,
         content: value
       }
-    });
+    })
   };
 
   handleSubmit = e => {

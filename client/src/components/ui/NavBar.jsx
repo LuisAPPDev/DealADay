@@ -24,25 +24,17 @@ class Navigation extends Component {
   };
 
   render() {
-    const greeting = this.props.loggedInUser ? (
-      <>Hola, {this.props.loggedInUser.username}!</>
-    ) : (
-      <>Hola, invitad@</>
-    );
+    const greeting = this.props.loggedInUser ? <>Hola, {this.props.loggedInUser.username}!</> : <>Hola, invitad@</>;
 
     return this.props.loggedInUser ? (
       <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
-        <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src="../../../icons/logo-big-w2_400x400.png"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />
-          <span style={{ color: "#55b1ca" }}>Deal </span>
-          <span style={{ color: "#f97810" }}>a </span>
-          <span style={{ color: "#55b1ca" }}>day</span>
+        <Navbar.Brand href="/">
+          <img alt="" src="../../../icons/2.svg" width="30" height="30" className="d-inline-block align-top" />
+          {/* <span style={{ color: "#55b1ca", fontWeight: "bold", fontSize: "1.5em" }}></span> */}
+          {/* <span style={{ color: "#f97810", fontWeight: "bold", fontSize: "1.2em", margin: " 0px 20px " }}> */}
+          {/* Tu página de chollos, un dia un chollo!
+          </span> */}
+          {/* <span style={{ color: "#55b1ca", fontWeight: "bold", fontSize: "1.5em" }}></span> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -61,15 +53,12 @@ class Navigation extends Component {
         </Navbar.Collapse>
       </Navbar>
     ) : (
-      <Navbar sticky="top" bg="warning" expand="lg" variant="light">
+      <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
         <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src="/logo.svg"
-            width="20"
-            height="20"
-            className="d-inline-block align-top"
-          />{" "}
+          <img alt="" src="../../../icons/2.svg" width="30" height="30" className="d-inline-block align-top" />
+          <span style={{ color: "#55b1ca" }}>Deal </span>
+          <span style={{ color: "#f97810" }}>a </span>
+          <span style={{ color: "#55b1ca" }}>day</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -80,11 +69,11 @@ class Navigation extends Component {
             </Nav.Link>
             <Nav.Link as="div">
               {" "}
-              <Link to="/signup">Registro</Link>
+              <Link to="/login">Inicio sesión</Link>
             </Nav.Link>
             <Nav.Link as="div">
               {" "}
-              <Link to="/login">Inicio sesión</Link>
+              <Link to="/signup">Registro</Link>
             </Nav.Link>
             <Nav.Link as="div">{greeting}</Nav.Link>
           </Nav>
