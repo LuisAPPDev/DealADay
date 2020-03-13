@@ -88,7 +88,12 @@ class DealDetails extends Component {
       if (similarDeals[i]._id == this.props.match.params.id){
         similarDeals.splice(i,1)
       }
+      
     }
+
+      if(similarDeals.length>4){
+        similarDeals.splice(4,similarDeals.length)
+      }    
       //RECORTAR ARRAY
      this.setState({similarDeals}) })
     .catch(err => console.log(err))
@@ -171,10 +176,14 @@ class DealDetails extends Component {
                 Comentarios
               </Header>
               {this.state.comments.map(elm => (
-                <ShowComments update={this.getAllComments} key={elm._id} {...elm} />
+                <ShowComments update={this.getAllComments} key={elm._id} {...elm} user={this.props.loggedInUser} />
               ))}
+
+              {(this.props.loggedInUser) ?
               <WriteComments update={this.getAllComments} {...this.props} user={this.props.loggedInUser}></WriteComments>
-              {/* {this.state.deal.video ? ( */}
+              :null}
+              {this.state.deal.video ? (
+                <>
               <Header as="h3" dividing>
               Video Reviews:
               </Header>
@@ -182,8 +191,9 @@ class DealDetails extends Component {
               id='eIw5b7VCIuU'
               placeholder="https://i.ytimg.com/vi/eIw5b7VCIuU/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLC44fuQaNQ5fAr5JSiOyRlv0rpNXA"
               source='youtube'
-              />
-              {/* // ) : null } */}
+              /> </>)
+              : null}
+               
             </Col>
             <Col md={{ span: 5, offset: 1 }}>
               
@@ -225,9 +235,7 @@ class DealDetails extends Component {
                   </Card>
                 </Accordion>
               ) : null}
-              <Button as="div" variant="outline-warning" className="buttonBack" size="sm">
-                <Link to="/">Volver</Link>
-              </Button>
+             
             </Col>
           </Row>
         </Container>
@@ -241,10 +249,10 @@ class DealDetails extends Component {
         </Modal>
 
         
-        <Confirm
+        <Confirm className="modalPop"
           open={this.state.open}
           header='Confirmar borrado'
-          content='Al pulsar en aceptar la oferta será eliminada y seras redirigido a la página principal'
+          content='Al pulsar en aceptar, la oferta será eliminada y serás redirigido a la página principal'
           cancelButton='Cancelar'
           confirmButton="Eliminar"
           onCancel={this.handleCancel}

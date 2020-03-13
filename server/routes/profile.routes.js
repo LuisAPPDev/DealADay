@@ -5,16 +5,36 @@ const Deal = require('../models/Deal.model')
 
 
 router.get('/getDealsPending', (req, res, next) => {
+
+  req.user.role == "admin" ?
   Deal.find({
-      status: "pending"
+      status: "pending",
     }).populate("author")
     .then(DealsPending => res.json(DealsPending))
     .catch(err => console.log(err))
+    :
+    Deal.find({
+      status: "pending",author : req.user._id
+    }).populate("author")
+    .then(DealsPending => res.json(DealsPending))
+    .catch(err => console.log(err))
+    
 })
 
+
+
 router.get('/getDealsApproved', (req, res, next) => {
+
+  req.user.role == "admin" ?
   Deal.find({
-      status: "active"
+      status: "active",
+    }).populate("author")
+    .then(DealsActive => res.json(DealsActive))
+    .catch(err => console.log(err))
+
+    :
+    Deal.find({
+      status: "active",author : req.user._id
     }).populate("author")
     .then(DealsActive => res.json(DealsActive))
     .catch(err => console.log(err))

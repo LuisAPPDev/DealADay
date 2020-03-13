@@ -35,7 +35,7 @@ const DealCard = ({ name, description, price, imageUrl, _id, likes, created_at, 
             <Card.Title>{name.length < 35 ? `${name}` : `${name.substring(0, 35)}...`}</Card.Title>
 
             <Card.Text>
-              {showDescription(description)}
+              {/* {showDescription(description)} */}
               {/* {(description && description.length < 35) ? `${description}` : `${description.substring(0, 35)}...`} */}
             </Card.Text>
             <Card.Text>

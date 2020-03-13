@@ -8,6 +8,7 @@ import FilesServices from "../../../services/files.services";
 //Time library
 import moment from "moment";
 
+
 //Components
 import CreateDeal from "../deals/CreateDeal";
 import DealCard from "../deals/DealCard";
@@ -59,6 +60,7 @@ class Profile extends Component {
       })
       .catch(err => console.log(err));
   };
+  
 
   render() {
     return (
@@ -68,6 +70,7 @@ class Profile extends Component {
             {/* <Icon name="users" circular /> */}
             <Image circular name="avatar" src={this.props.loggedInUser.avatar} />
             <Header.Content>Bienvenido {this.props.loggedInUser.username}</Header.Content>
+            
             <small>Miembro desde {moment(this.props.loggedInUser.created_at).format("L")}</small>
           </Header>
 

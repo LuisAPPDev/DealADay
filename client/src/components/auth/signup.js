@@ -29,6 +29,8 @@ class Signup extends Component {
         this.props.setTheUser(theLoggedNewUser);
       })
       .catch(err => console.log({ err }));
+      console.log(this.props)
+      this.props.history.push("/login")
   };
 
   handleSubmit = e => {

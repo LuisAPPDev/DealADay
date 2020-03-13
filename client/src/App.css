@@ -42,3 +42,9 @@ h1 {
 .between{
   justify-content: space-between;
 }
+
+.modalPop{
+  height: 25%;
+  top: auto;
+  left: auto;
+}

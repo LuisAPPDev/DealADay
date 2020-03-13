@@ -27,9 +27,8 @@ const TopCard = ({ name, price, imageUrl, _id, likes,externalUrl }) => {
     <div class="content">
       <div class="header">{name}</div>
       <div class="meta"><Rating icon='star' defaultRating={3} maxRating={4} /></div>
-      <div class="description">Estrellas</div> 
       <span style={{color:"orange"}}>{price}€</span><br></br>
-      <Button size='mini' as="a" href={externalUrl} target="_blank" basic color="blue" animated>
+      <Button size='mini' as="a" href={`/deals/${_id}`} target="_blank" basic color="blue" animated>
                     <Button.Content visible>Ver</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />

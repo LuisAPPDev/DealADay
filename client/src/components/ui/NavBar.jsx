@@ -25,6 +25,7 @@ class Navigation extends Component {
         this.props.setTheUser(false);
       })
       .catch(err => console.log(err));
+      // this.props.history.push("/");
   };
 
   render() {
@@ -53,7 +54,7 @@ class Navigation extends Component {
       </Navbar>
     ) : (
       <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img alt="" src="../../../icons/2.svg" width="30" height="30" className="d-inline-block align-top" />
           </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
