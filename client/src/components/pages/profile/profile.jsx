@@ -109,7 +109,7 @@ class Profile extends Component {
                 </li>
               </ul>
             </div>
-            <div class="col-md-6">Prueba</div>
+            {/* <div class="col-md-6">Prueba</div> */}
           </Row>
           <div className="row">
             {this.state.deals.map(elm => (

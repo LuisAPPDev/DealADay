@@ -61,9 +61,9 @@ class CategorySearch extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="/category/Portátiles">Portátiles</Dropdown.Item>
-                <Dropdown.Item href="/category/Televisores">Televisores</Dropdown.Item>
-                <Dropdown.Item href="/category/Tarjetas Gráficas">Tarjetas Gráficas</Dropdown.Item>
+              <Dropdown.Item ><Link to={`/category/Portátiles`}></Link>Portátiles</Dropdown.Item>
+                <Dropdown.Item ><Link to={`/category/Televisores`}></Link>Televisores</Dropdown.Item>
+                <Dropdown.Item ><Link to={`/category/Tarjetas Gráficas`}></Link>Tarjetas Gráficas</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
