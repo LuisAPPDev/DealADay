@@ -119,8 +119,11 @@ class DealDetails extends Component {
             Home
           </Breadcrumb.Section>
           <Breadcrumb.Divider />
-          <Breadcrumb.Section as="a" href={`/category/${this.state.deal.category}`}>
+          <Breadcrumb.Section>
+            <Link to={`/category/${this.state.deal.category}`}>
             {this.state.deal.category}{" "}
+
+            </Link>
           </Breadcrumb.Section>
           <Breadcrumb.Divider />
           <Breadcrumb.Section active>{this.state.deal.name}</Breadcrumb.Section>
