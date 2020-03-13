@@ -50,17 +50,8 @@ class DealsList extends Component {
   render() {
     return (
       <Container style={{ textAlign: "center" }}>
-        <Statistic.Group color="blue">
-          <Statistic>
-            <Statistic.Value>{this.state.deals.length}</Statistic.Value>
-            <Statistic.Label>Chollos</Statistic.Label>
-          </Statistic>
-          <Statistic>
-            <Statistic.Value>22</Statistic.Value>
-            <Statistic.Label>Usuarios</Statistic.Label>
-          </Statistic>
-        </Statistic.Group>
-        <CategorySearch dealFilter={this.getFilterDeals} />
+        
+        <CategorySearch dealFilter={this.getFilterDeals} dealsNumber={this.state.deals.length} />
         {this.state.deals.length ? (
           <Row style={{ justifyContent: "center" }}>
             {this.state.deals.map(elm => (

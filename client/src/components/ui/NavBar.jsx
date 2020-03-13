@@ -34,11 +34,6 @@ class Navigation extends Component {
       <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
         <Navbar.Brand href="/">
           <img alt="" src="../../../icons/2.svg" width="30" height="30" className="d-inline-block align-top" />
-          {/* <span style={{ color: "#55b1ca", fontWeight: "bold", fontSize: "1.5em" }}></span> */}
-          {/* <span style={{ color: "#f97810", fontWeight: "bold", fontSize: "1.2em", margin: " 0px 20px " }}> */}
-          {/* Tu página de chollos, un dia un chollo!
-          </span> */}
-          {/* <span style={{ color: "#55b1ca", fontWeight: "bold", fontSize: "1.5em" }}></span> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -60,10 +55,7 @@ class Navigation extends Component {
       <Navbar sticky="top" expand="lg" variant="dark" className="navbarFooter">
         <Navbar.Brand href="#home">
           <img alt="" src="../../../icons/2.svg" width="30" height="30" className="d-inline-block align-top" />
-          <span style={{ color: "#55b1ca" }}>Deal </span>
-          <span style={{ color: "#f97810" }}>a </span>
-          <span style={{ color: "#55b1ca" }}>day</span>
-        </Navbar.Brand>
+          </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">

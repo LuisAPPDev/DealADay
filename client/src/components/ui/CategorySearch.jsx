@@ -11,6 +11,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import { Statistic,List,Image } from "semantic-ui-react";
 
 class CategorySearch extends Component {
   constructor(props) {
@@ -40,15 +41,13 @@ class CategorySearch extends Component {
       },
       () => this.props.dealFilter(this.state.search)
     );
-    console.log(e.target.dataset);
-    this.props.dealFilter(e.target.dataset);
   };
 
   render() {
     return (
       <Navbar expand="lg" variant="dark" className="navbarSearch">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar.Collapse id="basic-navbar-nav" className="between">
           <Form inline>
             <FormControl type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Buscar chollo!" className="mr-sm-2" />
             <Button variant="outline-info" onClick={this.handleSubmit}>
@@ -62,13 +61,49 @@ class CategorySearch extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item data-id="patinete" onClick={this.handleSubmit}>
-                  Portatiles
-                </Dropdown.Item>
-                <Dropdown.Item href="/deals/category/">Componentes PC</Dropdown.Item>
-                <Dropdown.Item href="/deals/category/Televisores">Televisores</Dropdown.Item>
+                <Dropdown.Item href="/category/Portátiles">Portátiles</Dropdown.Item>
+                <Dropdown.Item href="/category/Televisores">Televisores</Dropdown.Item>
+                <Dropdown.Item href="/category/Tarjetas Gráficas">Tarjetas Gráficas</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+          </Nav>
+          <Nav className="justify-content-end" style={{fontSize : "10px"}}>
+          
+          <Statistic.Group size="tiny" color="blue">
+          <Statistic>
+            <Statistic.Value >{this.props.dealsNumber}</Statistic.Value>
+            <Statistic.Label>Chollos</Statistic.Label>
+          </Statistic>
+          <Statistic>
+            <Statistic.Value>22</Statistic.Value>
+            <Statistic.Label>Usuarios</Statistic.Label>
+          </Statistic>
+        </Statistic.Group>
+        </Nav>
+        <Nav>
+        <List horizontal>
+    <List.Item>
+      <Image avatar src='https://res.cloudinary.com/dpercx1rl/image/upload/v1583929813/deals/1%20%281%29.png.png' />
+      <List.Content>
+        <List.Header>Luis</List.Header>
+        Top Contributor
+      </List.Content>
+    </List.Item>
+    <List.Item>
+      <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+      <List.Content>
+        <List.Header>Juan</List.Header>
+        Top Writter
+      </List.Content>
+    </List.Item>
+    <List.Item>
+      <Image avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+      <List.Content>
+        <List.Header>David</List.Header>
+        Top Rated User
+      </List.Content>
+    </List.Item>
+  </List>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

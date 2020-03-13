@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import DealServices from "../../../services/deal.services";
 import CommentServices from "../../../services/comments.services";
 
+
 //Stylesheets
 import "./DealDetails.css";
 
 //Components
-
+import TopCard from "./TopCard"
+import DealCard from "./DealCard"
 import EditDeal from "./EditDeal";
 import WriteComments from "./WriteComments";
 import ShowComments from "./ShowComments";
@@ -29,27 +31,44 @@ import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Modal from "react-bootstrap/Modal";
-import { Header, Breadcrumb, Button, Icon, Label } from "semantic-ui-react";
+import { Header, Breadcrumb, Button, Icon, Label, Confirm, Embed } from "semantic-ui-react";
+
 
 class DealDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = { deal: {}, comments: [], showmodal: false };
+    this.state = { deal: {}, similarDeals : [], comments: [], showmodal: false,  open: false  };
     this.DealServices = new DealServices();
     this.CommentServices = new CommentServices();
   }
   closeModal = () => this.setState({ showmodal: false });
   openModal = () => this.setState({ showmodal: true });
 
+  show = () => this.setState({ open: true })
+  
+  handleConfirm = () => {
+    this.DealServices.deleteDeal(this.props.match.params.id)
+    .then(()=>{
+      this.setState({ open: false })
+      this.props.history.push('/')}) 
+  }
+
+  handleCancel = () => this.setState({ open: false })
+
   componentDidMount = () => {
-    this.getOneDeal();
+    this.getOneDeal()
     this.getAllComments();
+    this.getSimilarDeals();
   };
 
   getOneDeal = () => {
-    console.log(this.state.deal);
+    
     this.DealServices.getDealDetails(this.props.match.params.id)
-      .then(theDeal => this.setState({ deal: theDeal }))
+      .then(theDeal =>{
+
+       this.setState({ deal: theDeal })
+        this.getSimilarDeals();
+      })
       .catch(err => console.log(err));
   };
 
@@ -59,10 +78,33 @@ class DealDetails extends Component {
       .catch(err => console.log(err));
   };
 
+  getSimilarDeals = () => {
+    
+     this.DealServices.getSimilarDeals(this.state.deal.category)
+    .then(similarDeals =>{
+
+    for(let i=0;i<similarDeals.length;i++){
+
+      if (similarDeals[i]._id == this.props.match.params.id){
+        similarDeals.splice(i,1)
+      }
+    }
+      //RECORTAR ARRAY
+     this.setState({similarDeals}) })
+    .catch(err => console.log(err))
+    
+  }
+
   giveLike = () => {
-    this.DealServices.giveLike(this.props.match.params.id).then(() => this.getOneDeal());
-    // this.getOneDeal()
-  };
+    this.DealServices.giveLike(this.props.match.params.id).then(() => this.getOneDeal())}
+
+  changeDealStatus = () => {
+    let status = "";
+    
+    this.state.deal.status == "pending" ? status = "active" : status = "pending"
+    this.DealServices.changeDealStatus(this.props.match.params.id,status).then(() =>this.getOneDeal)
+    
+  }
 
   render() {
     return (
@@ -97,7 +139,7 @@ class DealDetails extends Component {
                   <Image className="icons" src={clock}></Image>
                   <small className="text-muted">3 mins ago</small>
                   <h4>{this.state.deal.name}</h4>
-                  <span style={{ color: "orange" }}>{this.state.deal.price}€</span> <strike style={{ color: "red" }}>1156€</strike>
+                  <span style={{ color: "orange" }}>{this.state.deal.price}€</span> <strike style={{ color: "red" }}>{(this.state.deal.price *1.15).toFixed(2)}€</strike>
                   <br></br>
                   <br></br>
                   <Button as="a" href={this.state.deal.externalUrl} target="_blank" basic color="blue" animated>
@@ -132,12 +174,27 @@ class DealDetails extends Component {
                 <ShowComments update={this.getAllComments} key={elm._id} {...elm} />
               ))}
               <WriteComments update={this.getAllComments} {...this.props} user={this.props.loggedInUser}></WriteComments>
+              {/* {this.state.deal.video ? ( */}
+              <Header as="h3" dividing>
+              Video Reviews:
+              </Header>
+              <Embed
+              id='eIw5b7VCIuU'
+              placeholder="https://i.ytimg.com/vi/eIw5b7VCIuU/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLC44fuQaNQ5fAr5JSiOyRlv0rpNXA"
+              source='youtube'
+              />
+              {/* // ) : null } */}
             </Col>
             <Col md={{ span: 5, offset: 1 }}>
-              <br></br>
-              <Button as="div" variant="outline-warning" className="buttonBack" size="sm">
-                <Link to="/">Volver</Link>
-              </Button>
+              
+               <Header as="h3" dividing>
+              Quizás te interese
+              </Header>
+              <div class="ui items">
+              {this.state.similarDeals.map(elm => (
+              <TopCard user={this.props.loggedInUser} key={elm._id} {...elm} />
+            ))}
+            </div>
               {this.props.loggedInUser.role === "admin" ? (
                 <Accordion>
                   <Card>
@@ -154,13 +211,13 @@ class DealDetails extends Component {
 
                         <br></br>
 
-                        <Link to="#" onClick="">
+                        <Link to="#" onClick={this.changeDealStatus}>
                           Cambiar estado publicación
                         </Link>
 
                         <br></br>
 
-                        <Link to="#" onClick="">
+                        <Link to="#" onClick={this.show}>
                           Eliminar
                         </Link>
                       </Card.Body>
@@ -168,6 +225,9 @@ class DealDetails extends Component {
                   </Card>
                 </Accordion>
               ) : null}
+              <Button as="div" variant="outline-warning" className="buttonBack" size="sm">
+                <Link to="/">Volver</Link>
+              </Button>
             </Col>
           </Row>
         </Container>
@@ -179,6 +239,18 @@ class DealDetails extends Component {
             <EditDeal {...this.props} deal={this.state.deal} update={this.getOneDeal} loggedInUser={this.props.loggedInUser} closeModal={this.closeModal} />
           </Modal.Body>
         </Modal>
+
+        
+        <Confirm
+          open={this.state.open}
+          header='Confirmar borrado'
+          content='Al pulsar en aceptar la oferta será eliminada y seras redirigido a la página principal'
+          cancelButton='Cancelar'
+          confirmButton="Eliminar"
+          onCancel={this.handleCancel}
+          onConfirm={this.handleConfirm}
+          size="small"
+        />
       </>
     );
   }

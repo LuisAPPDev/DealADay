@@ -10,6 +10,7 @@ h1 {
 
 .cardSpacing {
   margin: 10px 10px;
+  box-shadow: 0 0.1rem 0.2rem; 
 }
 
 .navbarSearch {
@@ -25,4 +26,19 @@ h1 {
 
 .container {
   min-height: calc(100vh - 113px);
+}
+
+.topCard{
+  margin: 10px 10px;
+
+}
+
+.topCard img{
+
+  object-fit: contain;
+  
+}
+
+.between{
+  justify-content: space-between;
 }

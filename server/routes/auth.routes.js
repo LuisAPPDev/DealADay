@@ -93,12 +93,12 @@ authRoutes.post('/signup', (req, res, next) => {
     User.create(NewUser)
       .then(() => {
         console.log("El email", NewUser.email)
-        let enlace = `<a href="http://localhost:3000/api/auth/confirm/${NewUser.confirmationCode}">Pincha aqui para confirmar</a>`
+        let enlace = `Bienvenido a Deal a Day!!!!! <br><br><a href="http://localhost:3000/api/auth/confirm/${NewUser.confirmationCode}">Pincha aqui para activar cuenta</a>`
         let text = `localhost:3000/api/auth/confirm/${NewUser.confirmationCode}`
         mailer.sendMail({
             from: '"Ironhacker Email 👻" <myawesome@project.com>',
             to: NewUser.email,
-            subject: "subject",
+            subject: "DealADay-.-Activación tu cuenta",
             text: text,
             html: enlace
           })
@@ -116,7 +116,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
 
 authRoutes.get("/confirm/:confirmCode", (req, res) => {
-  console.log("Entra en la confirmacion")
+  
   User.findOne({
       confirmationCode: req.params.confirmCode
     })

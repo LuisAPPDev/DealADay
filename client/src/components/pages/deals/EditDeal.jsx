@@ -19,7 +19,9 @@ class EditDeal extends Component {
         name: this.props.deal.name,
         category: this.props.deal.category,
         description: this.props.deal.description,
-        imageUrl: this.props.deal.imageUrl
+        imageUrl: this.props.deal.imageUrl,
+        externalUrl: this.props.deal.externalUrl,
+        price: this.props.deal.price
       }
     };
   }
@@ -71,21 +73,38 @@ class EditDeal extends Component {
         </Form.Group>
         <Form.Group>
           <Form.Label>Descripción</Form.Label>
-          <Form.Control
+          <Form.Control as="textarea" rows="3"
             type="text"
             name="description"
             value={this.state.deal.description}
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label>Category</Form.Label>
           <Form.Control type="text" name="category" value={this.state.deal.category} onChange={this.handleChange} />
-        </Form.Group>
+        </Form.Group> */}
+        <Form.Group>
+          <Form.Label>Categoría</Form.Label>
+          <Form.Control as="select" name="category" onChange={this.handleChange} value={this.state.deal.category}>
+          <option>Elegir...</option>
+          <option>Monitores</option>
+          <option>Televisores</option>
+          <option>Portátiles</option>
+          </Form.Control>
+          </Form.Group>
         <Form.Group>
           <Form.Label>Imagen</Form.Label>
           <Form.Control type="text" name="image" value={this.state.deal.imageUrl} onChange={this.handleChange} />
           <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Precio</Form.Label>
+          <Form.Control type="number" name="price" value={this.state.deal.price} onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Enlace externo</Form.Label>
+          <Form.Control type="text" name="externalUrl" value={this.state.deal.externalUrl} onChange={this.handleChange} />
         </Form.Group>
         <Button.Group>
           <Button type="submit" positive>

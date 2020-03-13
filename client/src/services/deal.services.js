@@ -16,7 +16,9 @@ export default class Services {
     giveLike = deal => this.service.get(`/giveLike/${deal}`).then(response => response.data)
     giveDislike = deal => this.service.get('/giveDislike').then(response => response.data);
     editDeal = (deal,id) => this.service.post(`/edit/${id}`,deal).then(response=> response.data);
-    deleteDeal = deal => this.service.post(`/delete`, deal).then(response => response.data)
+    deleteDeal = (id) => this.service.post(`/delete/${id}`).then(response => response.data)
+    getSimilarDeals = cat =>this.service.post(`/getSimilarDeals`,{cat}).then(response => response.data)
+    changeDealStatus = (id, deal) =>this.service.post(`/changeDealStatus/${id}`,{deal}).then(response=> response.data);
 
     // getTotalLikes = deal => this.service.get(`/getTotalLikes/${deal}`).then(response => response.data);
     

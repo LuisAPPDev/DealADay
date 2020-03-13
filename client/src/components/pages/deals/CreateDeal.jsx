@@ -20,6 +20,8 @@ class CreateDeal extends Component {
         category: "",
         description: "",
         imageUrl: "",
+        externalUrl:"",
+        price:"",
         author: this.props.loggedInUser._id
       }
     };
@@ -74,8 +76,18 @@ class CreateDeal extends Component {
           <Form.Control type="text" name="name" value={this.state.deal.name} onChange={this.handleChange} />
         </Form.Group>
         <Form.Group>
+          <Form.Label>Categoría</Form.Label>
+          <Form.Control as="select" name="category" onChange={this.handleChange} value="Choose...">
+          <option>Elegir...</option>
+          <option>Monitores</option>
+          <option>Televisores</option>
+          <option>Portátiles</option>
+          </Form.Control>
+           {/* value={this.state.deal.category}    */}
+        </Form.Group>{" "}
+        <Form.Group>
           <Form.Label>Descripción</Form.Label>
-          <Form.Control
+          <Form.Control as="textarea" rows="3"
             type="text"
             name="description"
             value={this.state.deal.description}
@@ -83,14 +95,13 @@ class CreateDeal extends Component {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-            type="text"
-            name="category"
-            value={this.state.deal.category}
-            onChange={this.handleChange}
-          />{" "}
-        </Form.Group>{" "}
+          <Form.Label>Precio</Form.Label>
+          <Form.Control type="number" name="price" value={this.state.deal.price} onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Enlace externo</Form.Label>
+          <Form.Control type="text" name="externalUrl" value={this.state.deal.externalUrl} onChange={this.handleChange} />
+        </Form.Group>
         <Form.Group>
           <Form.Label> Imagen </Form.Label>{" "}
           <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />{" "}

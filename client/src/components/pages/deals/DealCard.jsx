@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 //Design components
-import clock from "../../../images/alarm-24px.svg"
+import clock from "../../../images/alarm-24px.svg";
 import { Label } from "semantic-ui-react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -17,20 +17,15 @@ import Button from "react-bootstrap/Button";
 import CardGroup from "react-bootstrap/CardGroup";
 
 const DealCard = ({ name, description, price, imageUrl, _id, likes, created_at, author }) => {
+  function showDescription(description) {
+    if (description) {
+      if (description < 35) {
+        return description;
+      } else return description.substring(0, 74);
+    } else return "";
+  }
+
   
-
-function showDescription(description){
-  
-  if(description){
-
-    if(description < 35){
-
-      return description
-    }else return (description.substring(0, 74))
-
-  }else return ""
-
-}
   return (
     <>
       <CardGroup>
@@ -44,9 +39,9 @@ function showDescription(description){
               {/* {(description && description.length < 35) ? `${description}` : `${description.substring(0, 35)}...`} */}
             </Card.Text>
             <Card.Text>
-              <span style={{ color: "orange" }}>{price}€</span> <strike style={{ color: "red" }}>1156€</strike>
+              <span style={{ color: "orange" }}>{price}€</span> <strike style={{ color: "red" }}>{(price *1.15).toFixed(2)}€</strike>
             </Card.Text>
-            <Button as="div" variant="dark" size="sm">
+            <Button as="div" variant="light" size="sm">
               <Link to={`/deals/${_id}`}>Detalles</Link>
             </Button>
           </Card.Body>
@@ -57,7 +52,6 @@ function showDescription(description){
                   <img src={author.avatar} />
                   {author.username}
                 </Label>
-               
               </Col>
               <Col>
                 <Image className="icons" src={clock}></Image>
