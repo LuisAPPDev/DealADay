@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
+//Services
+import AuthServices from "../../services/auth.services";
+
+//Components
 import { Button, Divider, Form, Grid, Segment } from "semantic-ui-react";
 import Container from "react-bootstrap/Container";
-import AuthServices from "../../services/auth.services";
 
 class Login extends Component {
   constructor(props) {
@@ -69,7 +72,10 @@ class Login extends Component {
             </Grid.Column>
 
             <Grid.Column verticalAlign="middle">
-              <Button as="a" href="/signup" link content="Registrarse" icon="signup" size="big" />
+              <Button as="a" link content="Registrarse" icon="signup" size="big">
+                 <Link to={`/signup/`}>Registrarse
+                 </Link>
+            </Button>
             </Grid.Column>
           </Grid>
 

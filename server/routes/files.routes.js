@@ -32,7 +32,7 @@ router.post('/upload/avatar', uploader.single("imageUrl"), (req, res, next) => {
     }
 
     User.findByIdAndUpdate(req.user._id,NewAvatar,{new:true})
-    .then(response => console.log(response.data))
+    .then(response => response.data)
     .catch(err => next(err))
 
 

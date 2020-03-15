@@ -13,7 +13,6 @@ router.get('/getAllDeals', (req, res, next) => {
 
 router.post('/getFilterDeals', (req, res, next) => {
   const DealSearch = req.body.input
-  console.log(DealSearch)
   Deal.find({
       "name": {
         $regex: `.*${DealSearch}.*`,
@@ -86,7 +85,7 @@ router.post('/edit/:id', (req, res, next) => {
 })
 
 router.post('/changeDealStatus/:id', (req, res, next) => {
-  console.log(req.body)
+  
   const status = {
       status: req.body.deal
     }

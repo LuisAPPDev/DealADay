@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
-import Container from "react-bootstrap/Container";
+
+//Services
 import AuthServices from "../../services/auth.services";
-import { Button, Checkbox, Form, Header } from "semantic-ui-react";
+
+//Style components
+import Container from "react-bootstrap/Container";
+import { Button,Form, Header } from "semantic-ui-react";
 
 class Signup extends Component {
   constructor(props) {
@@ -29,7 +31,6 @@ class Signup extends Component {
         this.props.setTheUser(theLoggedNewUser);
       })
       .catch(err => console.log({ err }));
-      console.log(this.props)
       this.props.history.push("/login")
   };
 
@@ -42,7 +43,7 @@ class Signup extends Component {
     return (
       <Container>
         <Header textAlign="center" size="huge">
-          Registrarse
+          Registro
         </Header>
 
         <Form onSubmit={this.handleSubmit}>

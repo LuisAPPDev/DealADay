@@ -67,7 +67,6 @@ class Profile extends Component {
       <>
         <Container>
           <Header as="h2" icon textAlign="center">
-            {/* <Icon name="users" circular /> */}
             <Image circular name="avatar" src={this.props.loggedInUser.avatar} />
             <Header.Content>Bienvenido {this.props.loggedInUser.username}</Header.Content>
             
@@ -109,7 +108,7 @@ class Profile extends Component {
                 </li>
               </ul>
             </div>
-            {/* <div class="col-md-6">Prueba</div> */}
+            
           </Row>
           <div className="row">
             {this.state.deals.map(elm => (

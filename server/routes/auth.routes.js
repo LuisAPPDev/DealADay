@@ -42,7 +42,6 @@ authRoutes.post('/login', (req, res, next) => {
 
 authRoutes.post('/signup', (req, res, next) => {
 
-  console.log("------ PAYLOAD EN DESTINO -----", req.body)
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
@@ -92,7 +91,6 @@ authRoutes.post('/signup', (req, res, next) => {
 
     User.create(NewUser)
       .then(() => {
-        console.log("El email", NewUser.email)
         let enlace = `Bienvenido a Deal a Day ${username}!!!!! <br><br><a href="http://localhost:3000/api/auth/confirm/${NewUser.confirmationCode}">Pincha aqui para activar tu cuenta</a>`
         let text = `localhost:3000/api/auth/confirm/${NewUser.confirmationCode}`
         mailer.sendMail({

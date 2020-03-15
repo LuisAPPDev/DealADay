@@ -19,8 +19,6 @@ router.post('/create-comment', (req, res, next) => {
 })
 
 router.post('/delete-comment', (req, res, next) => {
-  
-  console.log(req.body)
   const deleteComment = req.body.id
 
   Comment.findByIdAndDelete(deleteComment)

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 //Services
 import CommentsServices from "../../../services/comments.services";
@@ -7,7 +7,7 @@ import CommentsServices from "../../../services/comments.services";
 import moment from "moment";
 
 //Style components
-import { Button, Comment, Icon, Form, Header } from "semantic-ui-react";
+import {Comment, Icon } from "semantic-ui-react";
 
 let activeComment = 0;
 let borr = new CommentsServices();

@@ -1,21 +1,17 @@
 import React, { Component } from "react";
-
-/* --- Styling sheets --- */
 import { Switch, Route, Redirect } from "react-router-dom";
 
 /* --- Styling sheets --- */
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-/* --- Styling sheets --- */
-import NavBar from "./components/ui/NavBar";
-
-/* --- Styling sheets --- */
+//Services
 import AuthServices from "./services/auth.services";
-import Login from "./components/auth/login";
-import Signup from "./components/auth/signup";
 
-/* ---  --- */
+/*Components*/
+import NavBar from "./components/ui/NavBar";
+import Signup from "./components/auth/signup";
+import Login from "./components/auth/login";
 import Profile from "./components/pages/profile/profile";
 import DealsList from "./components/pages/deals/DealList";
 import DealDetails from "./components/pages/deals/DealDetails";
@@ -29,7 +25,6 @@ class App extends Component {
     this.services = new AuthServices();
   }
 
-  //componentDidUpdate = (prevProps, prevState) => console.log("El estado de App se ha actualizado:", this.state)
   componentDidMount = () => this.fetchUser();
 
   setTheUser = userObj => this.setState({ loggedInUser: userObj });
