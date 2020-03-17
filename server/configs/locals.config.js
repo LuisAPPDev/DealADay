@@ -1,1 +1,1 @@
-module.exports = app => app.locals.title = 'Express - Generated with IronGenerator'
+module.exports = app => app.locals.title = 'Deal a day||Chollos diarios'

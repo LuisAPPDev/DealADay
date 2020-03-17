@@ -31,7 +31,7 @@ const ShowComments = ({ _id, content, author, created_at, update, user }) => {
         <Comment.Content>
           <Comment.Author as="a">{author.username}</Comment.Author>
           <Comment.Metadata>
-            {moment(created_at).format("lll")} {((user._id == author._id) || (user.role=="admin")) && <Icon data-id={_id} onClick={handleDelete} circular name="trash alternate outline" size="small" className="red users icon" />}
+            {moment(created_at).format("lll")} {((user._id === author._id) || (user.role==="admin")) && <Icon data-id={_id} onClick={handleDelete} circular name="trash alternate outline" size="small" className="red users icon" />}
           </Comment.Metadata>
           <Comment.Text>{content} </Comment.Text>
           <Comment.Actions>

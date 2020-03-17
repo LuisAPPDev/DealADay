@@ -11,14 +11,9 @@ import "./DealDetails.css";
 
 //Components
 import TopCard from "./TopCard"
-import DealCard from "./DealCard"
 import EditDeal from "./EditDeal";
 import WriteComments from "./WriteComments";
 import ShowComments from "./ShowComments";
-
-//Time library
-
-import moment from "moment";
 
 //Design Components
 
@@ -85,7 +80,7 @@ class DealDetails extends Component {
 
     for(let i=0;i<similarDeals.length;i++){
 
-      if (similarDeals[i]._id == this.props.match.params.id){
+      if (similarDeals[i]._id === this.props.match.params.id){
         similarDeals.splice(i,1)
       }
       
@@ -106,7 +101,7 @@ class DealDetails extends Component {
   changeDealStatus = () => {
     let status = "";
     
-    this.state.deal.status == "pending" ? status = "active" : status = "pending"
+    this.state.deal.status === "pending" ? status = "active" : status = "pending"
     this.DealServices.changeDealStatus(this.props.match.params.id,status).then(() =>this.getOneDeal)
     
   }
@@ -115,8 +110,8 @@ class DealDetails extends Component {
     return (
       <>
         <Breadcrumb>
-          <Breadcrumb.Section as="a" href="/" link>
-            Home
+          <Breadcrumb.Section>
+          <Link to={`/`}>Home </Link>
           </Breadcrumb.Section>
           <Breadcrumb.Divider />
           <Breadcrumb.Section>
@@ -203,11 +198,9 @@ class DealDetails extends Component {
                <Header as="h3" dividing>
               Quizás te interese
               </Header>
-              <div class="ui items">
-              {this.state.similarDeals.map(elm => (
-              <TopCard user={this.props.loggedInUser} key={elm._id} {...elm} />
-            ))}
-            </div>
+              <div className="ui items">
+                {this.state.similarDeals.map(elm => <TopCard key={elm._id} {...elm}/>)}
+              </div>
               {this.props.loggedInUser.role === "admin" ? (
                 <Accordion>
                   <Card>

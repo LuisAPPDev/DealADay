@@ -14,13 +14,11 @@ import CreateDeal from "../deals/CreateDeal";
 import DealCard from "../deals/DealCard";
 
 //Style components
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Header, Icon, Image } from "semantic-ui-react";
+import { Header, Image } from "semantic-ui-react";
 
 class Profile extends Component {
   constructor(props) {
@@ -38,14 +36,14 @@ class Profile extends Component {
   openModal = () => this.setState({ showmodal: true });
 
   getDealsApproved = () => {
-    this.state.searchDeals = "Aprobados";
+    this.setState({searchDeals : "Aprobados"})
     this.ProfServices.getDealsApproved()
       .then(DealsApproved => this.setState({ deals: DealsApproved }))
       .catch(err => console.log(err));
   };
 
   getDealsPending = () => {
-    this.state.searchDeals = "Pendientes";
+    this.setState({searchDeals : "Pendientes"})
     this.ProfServices.getDealsPending()
       .then(DealsPending => this.setState({ deals: DealsPending }))
       .catch(err => console.log(err));
@@ -75,9 +73,9 @@ class Profile extends Component {
 
           <Row>
             <br></br>
-            <div class="col-md-6">
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div className="col-md-6">
+              <ul className="list-group">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   {this.props.loggedInUser && (
                     <Link to="#" onClick={this.openModal}>
                       Crear nuevo chollo

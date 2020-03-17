@@ -1,28 +1,40 @@
-import React from "react";
+import React,{Component} from "react";
 import { Link } from "react-router-dom";
 import "./DealCard.css";
 
 //Design components
-import { Button,Rating } from "semantic-ui-react";
+import { Rating } from "semantic-ui-react";
+// import Button from "react-bootstrap/Button";
+class TopCard extends Component {
+  constructor(props){
+    super(props)
 
-const TopCard = ({ name, price, imageUrl, _id}) => {
-  
-  
+  }
+
+  componentDidUpdate(){
+    console.log('lol')
+  }
+
+render(){
+
+  // let url = "/deals/" + {_id}
+
   return (
     <>
-    <div class="item">
-    <div class="image"><img src={imageUrl} /></div>
-    <div class="content">
-      <div class="header">{name}</div>
-      <div class="meta"><Rating icon='star' defaultRating={3} maxRating={4} /></div>
-      <span style={{color:"orange"}}>{price}€</span><br></br>
-      <Button as="a" link content="Ver" size="tiny">
-        <Link to={`/deals/${_id}`}>Ver</Link>
-      </Button>
+    <div className="item">
+    <div className="image"><img src={this.props.imageUrl} alt={this.props.name}/></div>
+    <div className="content">
+    <div className="header">{this.props.name}</div>
+     <div className="meta"><Rating icon='star' defaultRating={3} maxRating={4} /></div>
+    <span style={{color:"orange"}}>{this.props.price}€</span><br></br>
+
+    <Link to={`/deals/${this.props._id}`}>Detalles</Link>
+    {/* <button onClick={() => props.history.push('this.props._id')}>Home</button> */}
     </div>
   </div>
   </>
   );
+}
 };
 
 export default TopCard;

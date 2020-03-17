@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./DealCard.css";
 import { Link } from "react-router-dom";
 
@@ -16,47 +16,55 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import CardGroup from "react-bootstrap/CardGroup";
 
-const DealCard = ({ name, description, price, imageUrl, _id, likes, created_at, author }) => {
-  function showDescription(description) {
-    if (description) {
-      if (description < 35) {
-        return description;
-      } else return description.substring(0, 74);
-    } else return "";
-  }
-
+class DealCard extends Component{
+  constructor(props){
+  super(props)
+}
   
+
+componentDidUpdate(){
+  console.log('lol')
+}
+
+  // function showDescription(description) {
+  //   if (description) {
+  //     if (description < 35) {
+  //       return description;
+  //     } else return description.substring(0, 74);
+  //   } else return "";
+  // }
+
+  render(){
+
   return (
     <>
       <CardGroup>
         <Card className="cardSpacing" border="warning" style={{ width: "18rem" }}>
-          <Card.Img variant="top" className="imgDeals rounded" src={`${imageUrl}`} />
+          <Card.Img variant="top" className="imgDeals rounded" src={`${this.props.imageUrl}`} />
           <Card.Body>
-            <Card.Title>{name.length < 35 ? `${name}` : `${name.substring(0, 35)}...`}</Card.Title>
+            <Card.Title>{this.props.name.length < 35 ? `${this.props.name}` : `${this.props.name.substring(0, 35)}...`}</Card.Title>
 
             <Card.Text>
-              {/* {showDescription(description)} */}
-              {/* {(description && description.length < 35) ? `${description}` : `${description.substring(0, 35)}...`} */}
             </Card.Text>
             <Card.Text>
-              <span style={{ color: "orange" }}>{price}€</span> <strike style={{ color: "red" }}>{(price *1.15).toFixed(2)}€</strike>
+              <span style={{ color: "orange" }}>{this.props.price}€</span> <strike style={{ color: "red" }}>{(this.props.price *1.15).toFixed(2)}€</strike>
             </Card.Text>
             <Button as="div" variant="light" size="sm">
-              <Link to={`/deals/${_id}`}>Detalles</Link>
+              <Link to={`/deals/${this.props._id}`}>Detalles</Link>
             </Button>
           </Card.Body>
           <Card.Footer>
             <Row>
               <Col>
                 <Label as="a" image>
-                  <img src={author.avatar} />
-                  {author.username}
+                  <img src={this.props.author.avatar} alt={this.props.name} />
+                  {this.props.author.username}
                 </Label>
               </Col>
               <Col>
                 <Image className="icons" src={clock}></Image>
                 <small className="text-muted">
-                  {moment(created_at)
+                  {moment(this.props.created_at)
                     .subtract(6, "days")
                     .calendar()}
                 </small>
@@ -68,5 +76,5 @@ const DealCard = ({ name, description, price, imageUrl, _id, likes, created_at, 
     </>
   );
 };
-
+}
 export default DealCard;

@@ -35,7 +35,7 @@ class WriteComments extends Component {
   };
 
   handleChange = e => {
-    let { name, value } = e.target;
+    let { value } = e.target;
     this.setState({
       comment: {
         author: this.props.user._id,

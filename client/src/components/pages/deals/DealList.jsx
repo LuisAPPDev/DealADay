@@ -10,9 +10,7 @@ import DealCard from "./DealCard";
 //Style components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import { Statistic } from "semantic-ui-react";
 
 class DealsList extends Component {
   constructor(props) {
