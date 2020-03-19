@@ -16,6 +16,7 @@ DealaDay uses a number of open source projects to work properly:
 * [Semantic UI] - great UI boilerplate for modern web apps
 * [node.js] - evented I/O for the backend
 * [Express] - fast node.js network app framework
+* [Mongoose] - ODM for MongoDB
 
 ### Installation
 
